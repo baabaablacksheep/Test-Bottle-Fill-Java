@@ -1,4 +1,6 @@
-import java.awt.FlowLayout;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class Demo {
@@ -6,15 +8,24 @@ public class Demo {
         JFrame frame = new JFrame("JFrame Example");
 
         JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout());
-
-        JLabel label = new JLabel("This is a label!");
+        panel.setLayout(null);
+//        panel.setLayout(new GridLayout());
+//        panel.setLayout(new FlowLayout());
 
         JButton button = new JButton();
-        button.setText("Press me");
+        button.setText("Press Me");
+        button.setBounds(100,100,100,20);
 
-        panel.add(label);
+        JTextField textField=new JTextField();
+        textField.setBounds(50,50, 150,20);
+
+
+        button.addActionListener(e -> textField.setText("Welcome to The Jungle"));
+
         panel.add(button);
+        panel.add(textField);
+
+
 
         frame.add(panel);
         frame.setSize(800, 640);
