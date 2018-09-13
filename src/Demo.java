@@ -1,12 +1,27 @@
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.Graphics;
 
 public class Demo implements MouseListener{
 
     private static JButton fillButton = new JButton();
     private static JButton drainButton = new JButton();
     private static JTextField textField = new JTextField();
+    private BufferedImage flaskImage;
+
+    Demo() {
+        try {
+            flaskImage = ImageIO.read(new File("/resources/flask.png"));
+
+        } catch (IOException ex) {
+            // handle exception...
+        }
+    }
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Bottle Fill Example");
@@ -26,14 +41,15 @@ public class Demo implements MouseListener{
         textField=new JTextField();
         textField.setBounds(50,50, 250,20);
 
-
-        //fillButton.addActionListener(e -> textField.setText("Welcome to The Jungle"));
-
         panel.add(fillButton);
         panel.add(drainButton);
         panel.add(textField);
 
-
+/*        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(image, 0, 0, this); // see javadoc for more info on the parameters
+        }*/
 
         frame.add(panel);
         frame.setSize(800, 640);
