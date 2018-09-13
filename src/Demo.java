@@ -5,11 +5,11 @@ import javax.swing.*;
 
 public class Demo implements MouseListener {
 
-    private static JButton fillButton = new JButton();
-    private static JButton drainButton = new JButton();
-    private static JTextField textField = new JTextField();
-    private static JLabel flaskImageLabel;
-    private static ImageIcon flaskImage;
+    static JButton fillButton = new JButton();
+    static JButton drainButton = new JButton();
+    static JTextField textField = new JTextField();
+    static JLabel flaskImageLabel;
+    static ImageIcon flaskImage;
 
 
     public static void main(String[] args) {
@@ -55,9 +55,14 @@ public class Demo implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         if (e.getSource().equals(fillButton)) {
-            textField.setText("Mouse Pressed By Fill!");
+            FillThread obj=new FillThread("First Thread");
+            obj.start();
+            //textField.setText("Mouse Pressed By Fill!");
+
         } else {
-            textField.setText("Mouse Pressed By Drain!");
+            DrainThread obj=new DrainThread("Second Thread");
+            obj.start();
+            //textField.setText("Mouse Pressed By Drain!");
         }
 
     }
@@ -88,6 +93,49 @@ public class Demo implements MouseListener {
             textField.setText("Mouse Has Gone Away From Fill");
         } else {
             textField.setText("Mouse Has Gone Away From Drain");
+        }
+    }
+}
+
+class FillThread implements Runnable{
+
+    private Thread t;
+    private String threadName;
+
+    public FillThread(String threadName) {
+        this.threadName = threadName;
+    }
+
+    @Override
+    public void run() {
+        new Demo().textField.setText("Ha HA Ha Thread Runs!");
+    }
+    public void start () {
+        System.out.println("Starting " +  threadName );
+        if (t == null) {
+            t = new Thread (this, threadName);
+            t.start ();
+        }
+    }
+}
+class DrainThread implements Runnable{
+
+    private Thread t;
+    private String threadName;
+
+    public DrainThread(String threadName) {
+        this.threadName = threadName;
+    }
+
+    @Override
+    public void run() {
+        new Demo().textField.setText("Ha HA Ha Second Thread Runs!");
+    }
+    public void start () {
+        System.out.println("Starting " +  threadName );
+        if (t == null) {
+            t = new Thread (this, threadName);
+            t.start ();
         }
     }
 }
