@@ -1,29 +1,36 @@
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.*;
 
-public class Demo {
-    public static JButton button= new JButton();
-    public static JTextField textField = new JTextField();
+public class Demo implements MouseListener{
+
+    private static JButton fillButton = new JButton();
+    private static JButton drainButton = new JButton();
+    private static JTextField textField = new JTextField();
+
     public static void main(String[] args) {
-        JFrame frame = new JFrame("JFrame Example");
+        JFrame frame = new JFrame("Bottle Fill Example");
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
-        button.setText("Press Me");
-        button.setBounds(100,100,100,20);
+        fillButton.setText("Fill");
+        fillButton.setBounds(50,100,100,20);
+
+        drainButton.setText("Drain");
+        drainButton.setBounds(170,100,100,20);
+
+        fillButton.addMouseListener(new Demo());
+        drainButton.addMouseListener(new Demo());
 
         textField=new JTextField();
-        textField.setBounds(50,50, 150,20);
+        textField.setBounds(50,50, 250,20);
 
 
-        //button.addActionListener(e -> textField.setText("Welcome to The Jungle"));
+        //fillButton.addActionListener(e -> textField.setText("Welcome to The Jungle"));
 
-        panel.add(button);
+        panel.add(fillButton);
+        panel.add(drainButton);
         panel.add(textField);
 
 
@@ -34,37 +41,29 @@ public class Demo {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
-}
-
-class MouseObserver implements MouseListener {
-
-    MouseObserver(){
-        Demo.button.addMouseListener(this);
-    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
 
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        Demo.textField.setText("Mouse Clicked.........");
+        textField.setText("Mouse Pressed!");
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        Demo.textField.setText("Mouse Released.........");
+        textField.setText("Mouse Released!");
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        textField.setText("Mouse Has Entered!");
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        textField.setText("Mouse Has Gone Away");
     }
 }
