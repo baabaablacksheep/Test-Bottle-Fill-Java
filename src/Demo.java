@@ -15,10 +15,10 @@ public class Demo implements MouseListener{
         panel.setLayout(null);
 
         fillButton.setText("Fill");
-        fillButton.setBounds(50,100,100,20);
+        fillButton.setBounds(50,100,80,20);
 
         drainButton.setText("Drain");
-        drainButton.setBounds(170,100,100,20);
+        drainButton.setBounds(200,100,80,20);
 
         fillButton.addMouseListener(new Demo());
         drainButton.addMouseListener(new Demo());
@@ -49,21 +49,44 @@ public class Demo implements MouseListener{
 
     @Override
     public void mousePressed(MouseEvent e) {
-        textField.setText("Mouse Pressed!");
+        if(e.getSource().equals(fillButton)){
+            textField.setText("Mouse Pressed By Fill!");
+        }
+        else{
+            textField.setText("Mouse Pressed By Drain!");
+        }
+
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        textField.setText("Mouse Released!");
+        if(e.getSource().equals(fillButton)){
+            textField.setText("Mouse Released By Fill!");
+        }
+        else{
+            textField.setText("Mouse Released By Drain!");
+        }
+
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        textField.setText("Mouse Has Entered!");
+        if(e.getSource().equals(fillButton)){
+            textField.setText("Mouse Has Entered to Fill!");
+        }
+        else{
+            textField.setText("Mouse Has Entered to Drain!");
+        }
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        textField.setText("Mouse Has Gone Away");
+        if(e.getSource().equals(fillButton)) {
+            textField.setText("Mouse Has Gone Away From Fill");
+        }
+        else{
+            textField.setText("Mouse Has Gone Away From Drain");
+        }
     }
 }
